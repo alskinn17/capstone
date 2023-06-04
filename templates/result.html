@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <nav>
+        <ul>
+          <li><a href="/" {% if active_page == "home" %}class="current"{% endif %}>Home</a></li>
+          <li><a href="/standard" {% if active_page == "team_stats" %}class="current"{% endif %}>Team Statistics</a></li>
+          <li><a href="/table" {% if active_page == "table" %}class="current"{% endif %}>Current Table</a></li>
+          <li><a href="/predict" {% if active_page == "prediction" %}class="current"{% endif %}>Match Prediction</a></li>
+        </ul>
+    </nav>    
+<head>
+    <title>Result</title>
+    <style>
+        /* Center each line individually */
+        h1, h2, p {
+            text-align: center;
+        }
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            margin: 0 10px; /* Adjust the margin as needed */
+        }
+        .last-updated {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        nav {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+
+        nav ul li a.current {
+            background-color: #333;
+            color: #fff;
+        }                    
+    </style>
+</head>
+<body>
+    <h1>{{ home_team }} vs {{ away_team }}</h1>
+
+    <div class="logos">
+        <img src="{{ url_for('static', filename='Images/' + home_logo) }}" alt="Home Team Logo", class="logo">
+        <img src="{{ url_for('static', filename='Images/' + away_logo) }}" alt="Away Team Logo", class="logo">
+    </div>
+    
+    <h2>Predicted Result:</h2>
+    <p>{{ result_string }}</p>
+    <p>{{ probs_string }}</p>
+
+    <div class="last-updated">Last updated: 5/29/2023</div>
+
+</body>
+</html>

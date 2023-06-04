@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <nav>
+    <ul>
+      <li><a href="/" {% if active_page == "home" %}class="current"{% endif %}>Home</a></li>
+      <li><a href="/standard" {% if active_page == "team_stats" %}class="current"{% endif %}>Team Statistics</a></li>
+      <li><a href="/table" {% if active_page == "table" %}class="current"{% endif %}>Current Table</a></li>
+      <li><a href="/predict" {% if active_page == "prediction" %}class="current"{% endif %}>Match Prediction</a></li>
+    </ul>
+  </nav>
+<head>
+    <title>Result</title>
+    <style>
+        /* Center each line individually */
+        h1, h2, h3, h4, h5, p {
+            text-align: center;
+        }
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            margin: 0 10px; /* Adjust the margin as needed */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+            
+            th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+            
+            th {
+            background-color: #f2f2f2;
+        }
+            
+            tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .last-updated {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        nav {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+
+        nav ul li a.current {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="logos">
+        <img src="{{ url_for('static', filename='Images/company_logo_use.png') }}" alt="Logo", class="logo">
+    </div>
+<h2>Teams Currently Qualifying for UEFA Champions League</h2>
+<table>
+  <tr>
+    {% for column in top4[0].keys() %}
+    <th>{{ column }}</th>
+    {% endfor %}
+  </tr>
+  {% for row in top4 %}
+  <tr>
+    {% for value in row.values() %}
+    <td>{{ value }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+<h2>Teams Who Would Currently be Relegated from the EPL</h2>
+<table>
+    <tr>
+      {% for column in bot3[0].keys() %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+    {% for row in bot3 %}
+    <tr>
+      {% for value in row.values() %}
+      <td>{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</table>
+<h2>Last Weeks Fixtures</h2>
+<table>
+    <tr>
+      {% for column in prev_fixtures[0].keys() %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+    {% for row in prev_fixtures %}
+    <tr>
+      {% for value in row.values() %}
+      <td>{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</table>
+<h2>Upcoming Fixtures</h2>
+<table>
+    <tr>
+      {% for column in next_fixtures[0].keys() %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+    {% for row in next_fixtures %}
+    <tr>
+      {% for value in row.values() %}
+      <td>{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="last-updated">Last updated: 5/29/2023</div>
+
+</body>
+</html>

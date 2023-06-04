@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <nav>
+    <ul>
+      <li><a href="/" {% if active_page == "home" %}class="current"{% endif %}>Home</a></li>
+      <li><a href="/standard" {% if active_page == "team_stats" %}class="current"{% endif %}>Team Statistics</a></li>
+      <li><a href="/table" {% if active_page == "table" %}class="current"{% endif %}>Current Table</a></li>
+      <li><a href="/predict" {% if active_page == "prediction" %}class="current"{% endif %}>Match Prediction</a></li>
+    </ul>
+  </nav>
+<head>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+            
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+            
+    th {
+        background-color: #f2f2f2;
+    }
+            
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .last-updated {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+        color: #888;
+    } 
+    nav {
+        background-color: #f2f2f2;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    nav ul li {
+        display: inline;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+    }
+
+    nav ul li a:hover {
+        background-color: #ddd;
+    }
+
+    nav ul li a.current {
+        background-color: #333;
+        color: #fff;
+    } 
+    #table-container {
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+    }
+    #pdf-container {
+        position: relative;
+        z-index: 0;
+    }
+    #image-wrapper {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #image-placeholder {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+      
+    .table-option {
+        padding: 10px 20px;
+        margin: 0px;
+        text-decoration: none;
+        background-color: #f2f2f2;
+        color: #333;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+      
+    .table-option:hover {
+        background-color: #ddd;
+    }
+      
+    .table-option.current {
+        background-color: #333;
+        color: #fff;
+    }         
+</style>
+  <title>Table Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function loadTable(url, imageUrl) {
+      $('#table-container').load(url + ' #table-container');
+      if (imageUrl) {
+        $('#image-placeholder').attr('src', imageUrl);
+      } else {
+        $('#image-placeholder').attr('src', '');
+      }
+    }
+  </script>
+</head>
+<div>
+  <a href="#" onclick="loadTable('/standard', 'static/Definitions/standard.png')" class="table-option">Standard</a>
+  <a href="#" onclick="loadTable('/defense', 'static/Definitions/defense.png')" class="table-option">Defense</a>
+  <a href="#" onclick="loadTable('/gca', 'static/Definitions/gca.png')" class="table-option">Goal Creation</a>
+  <a href="#" onclick="loadTable('/passing', 'static/Definitions/passing.png')" class="table-option">Passing</a>
+  <a href="#" onclick="loadTable('/shooting', 'static/Definitions/shooting.png')" class="table-option">Shooting</a>
+  <a href="#" onclick="loadTable('/standard-against', 'static/Definitions/standard.png')" class="table-option">Standard Against</a>
+  <a href="#" onclick="loadTable('/defense-against', 'static/Definitions/defense.png')" class="table-option">Defense Against</a>
+  <a href="#" onclick="loadTable('/gca-against', 'static/Definitions/gca.png')" class="table-option">Goal Creation Against</a>
+  <a href="#" onclick="loadTable('/passing-against', 'static/Definitions/passing.png')" class="table-option">Passing Against</a>
+  <a href="#" onclick="loadTable('/shooting-against', 'static/Definitions/shooting.png')" class="table-option">Shooting Against</a>  
+</div>
+<body>
+  <div id="table-container">
+    {% include 'table_data.html' %}
+  </div>
+  <div id="pdf-container">
+    <div id="image-wrapper">
+      <img id="image-placeholder" src="static/Definitions/standard.png" alt="Image Placeholder">
+    </div>
+  </div>
+  <div class="last-updated">Last updated: 5/29/2023</div>
+  
+</body>
+</html>

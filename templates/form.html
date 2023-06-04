@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <nav>
+        <ul>
+          <li><a href="/" {% if active_page == "home" %}class="current"{% endif %}>Home</a></li>
+          <li><a href="/standard" {% if active_page == "team_stats" %}class="current"{% endif %}>Team Statistics</a></li>
+          <li><a href="/table" {% if active_page == "table" %}class="current"{% endif %}>Current Table</a></li>
+          <li><a href="/predict" {% if active_page == "prediction" %}class="current"{% endif %}>Match Prediction</a></li>
+        </ul>
+    </nav>    
+<head>
+    <title>Team Selection</title>
+    <style>
+        h1, h2, h3, h4, h5, p {
+            text-align: center;
+        }  
+        table td.label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Increase font size and width for dropdowns */
+        table td.dropdown select {
+            font-size: 16px;
+            width: 200px;
+        }        
+        table {
+            margin: 0 auto;
+        }
+        /* Center the submit button */
+        input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }      
+        .last-updated {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        nav {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+
+        nav ul li a.current {
+            background-color: #333;
+            color: #fff;
+        }                  
+    </style>
+</head>
+<body>
+    <h1>Select Teams:</h1>
+    <form action="/predict" method="post">
+        <table>
+            <tr>
+              <td class="label">Home Team:</td>
+              <td class="label">Away Team:</td>
+            </tr>
+            <tr>
+              <td class="dropdown">
+                <select name="home_team" id="home_team">
+                    <!-- Populate the dropdown with team options -->
+                    <option value="Arsenal">Arsenal</option>
+                    <option value="Aston Villa">Aston Villa</option>
+                    <option value="Bournemouth">Bournemouth</option>
+                    <option value="Brentford">Brentford</option>
+                    <option value="Brighton">Brighton & Hove Alvion</option>
+                    <option value="Chelsea">Chelsea</option>
+                    <option value="Crystal Palace">Crystal Palace</option>
+                    <option value="Everton">Everton</option>
+                    <option value="Fulham">Fulham</option>
+                    <option value="Leeds">Leeds United</option>
+                    <option value="Leicester">Leicester City</option>
+                    <option value="Liverpool">Liverpool</option>
+                    <option value="Man City">Manchester City</option>
+                    <option value="Man United">Manchester United</option>
+                    <option value="Newcastle">Newcastle United</option>
+                    <option value="Nott'm Forest">Nottingham Forest</option>
+                    <option value="Southampton">Southampton</option>
+                    <option value="Tottenham">Tottenham Hotspur</option>
+                    <option value="West Ham">West Ham United</option>
+                    <option value="Wolves">Wolverhampton Wanderers</option>
+                </select>  
+              </td>
+              <td class="dropdown">
+                <select name="away_team" id="away_team">
+                    <!-- Populate the dropdown with team options -->
+                    <option value="Arsenal">Arsenal</option>
+                    <option value="Aston Villa">Aston Villa</option>
+                    <option value="Bournemouth">Bournemouth</option>
+                    <option value="Brentford">Brentford</option>
+                    <option value="Brighton">Brighton & Hove Alvion</option>
+                    <option value="Chelsea">Chelsea</option>
+                    <option value="Crystal Palace">Crystal Palace</option>
+                    <option value="Everton">Everton</option>
+                    <option value="Fulham">Fulham</option>
+                    <option value="Leeds">Leeds United</option>
+                    <option value="Leicester">Leicester City</option>
+                    <option value="Liverpool">Liverpool</option>
+                    <option value="Man City">Manchester City</option>
+                    <option value="Man United">Manchester United</option>
+                    <option value="Newcastle">Newcastle United</option>
+                    <option value="Nott'm Forest">Nottingham Forest</option>
+                    <option value="Southampton">Southampton</option>
+                    <option value="Tottenham">Tottenham Hotspur</option>
+                    <option value="West Ham">West Ham United</option>
+                    <option value="Wolves">Wolverhampton Wanderers</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <input type="submit" value="Predict">
+        </form>
+
+        <div class="last-updated">Last updated: 5/29/2023</div>
+
+</body>
+</html>
